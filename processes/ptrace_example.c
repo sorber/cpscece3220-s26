@@ -7,23 +7,14 @@
 #include <sys/ptrace.h>
 #include <linux/ptrace.h>
 
-//in case you want to run it on an arm64-based linux machine
-#if defined(__arm__) || defined(__aarch64__)
-#elif defined(__x86_64__) || defined(__i386__)
-    #include <sys/reg.h>
-#else
-    error("arch unknown.")
-#endif
-
 #include <sys/wait.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <errno.h>
-#include <string.h>
 #include <time.h>
 
 
