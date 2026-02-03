@@ -1,6 +1,6 @@
 
 CC=clang
-CFLAGS=-Wall -g
+CFLAGS=-Wall -g -std=c11
 BINS=pthreadex pthreadex2 pthreadex3 #conditionex asyncio readwritelockex sem
 
 

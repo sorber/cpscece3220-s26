@@ -4,6 +4,8 @@
 #include <stdbool.h>
 #include <assert.h>
 #include <stdint.h>
+#include <unistd.h>
+#include <stdalign.h>
 
 #define BIG 10000000000L  //10 billion
 
@@ -23,9 +25,22 @@ void * mythreadfunc(void *arg) {
 int main(int argc, char **argv) {
 	
 	pthread_t t1, t2;
-	uint64_t sum1 = 0;
-	char dummy[1000];
-	uint64_t sum2 = 0;
+	uint64_t alignas(64) sum1 = 0;
+	//char dummy[1000];
+	uint64_t alignas(64) sum2 = 0;
+
+
+	long cache_line_size = sysconf(_SC_LEVEL1_DCACHE_LINESIZE);
+    
+    if (cache_line_size == -1) {
+        perror("sysconf");
+        return 1;
+    }
+
+    printf("Cache Line Size (L1 data): %ld bytes\n", cache_line_size);
+
+	printf("&counter1 = %p\n", &sum1);
+    printf("&counter2 = %p\n", &sum2);
 
 	pthread_create(&t1, NULL, mythreadfunc, &sum1);
 	pthread_create(&t2, NULL, mythreadfunc, &sum2);

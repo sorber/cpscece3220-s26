@@ -16,7 +16,7 @@ char *get_line(char *buf, size_t bufsize);
 
 int main(int argc, char **argv)
 {
-	pthread_t t;
+	//pthread_t t;
 	
 	bank_init(0); //initial balance is zero.
 

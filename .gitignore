@@ -27,3 +27,15 @@ ipc/shmem2
 ipc/msgpassingserver
 ipc/msgpassingclient
 ipc/socket_server
+
+
+threads/asyncio
+threads/pthreadex
+threads/pthreadex2
+threads/pthreadex3
+threads/conditionex
+threads/readwritelockex
+threads/sem
+threads/bank/mybank
+
+*.o
