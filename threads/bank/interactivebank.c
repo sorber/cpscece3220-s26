@@ -7,19 +7,46 @@
 #include <stdbool.h>
 
 #define MAX_LINE 1024
+#define FEE_AMOUNT 100
+#define SECONDS_TO_FEE 5
 
+int counter = 0;
+pthread_mutex_t mylock = PTHREAD_MUTEX_INITIALIZER;
 
 char *get_line(char *buf, size_t bufsize);
 
 
+void *feefunc(void *arg) {
+	
+	
+	while (1) {
+		
+		sleep(1);
+		counter++;
+		if (counter >= SECONDS_TO_FEE) {
+
+			pthread_mutex_lock(&mylock);
+			//charge a fee
+			bank_do_command("withdraw",FEE_AMOUNT);
+			pthread_mutex_unlock(&mylock);
+		
+			printf("Ha ha, I just took $%d from your account.\n", FEE_AMOUNT);
+			counter = 0;
+		}
+		
+	}
+	
+	return NULL;
+}
 
 
 int main(int argc, char **argv)
 {
-	//pthread_t t;
+	pthread_t t;
 	
 	bank_init(0); //initial balance is zero.
 
+	pthread_create(&t, NULL, feefunc, NULL);
 	while (1)
 	{
 		char buffer[MAX_LINE + 1];
@@ -32,7 +59,8 @@ int main(int argc, char **argv)
 		if (NULL == get_line(buffer, MAX_LINE))
 			break;
 		
-	
+		counter = 0;
+
 		// use strtok_r to make it thread safe
 		char *saveptr;
 		char *cmd = strtok_r(buffer, " ", &saveptr);
@@ -44,7 +72,9 @@ int main(int argc, char **argv)
 		// respond to commands
 		int response;
 
+		pthread_mutex_lock(&mylock);
 		response = bank_do_command(cmd, value);
+		pthread_mutex_unlock(&mylock);
 		
 		
 		if (response >= 0)
