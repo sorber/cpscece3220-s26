@@ -37,5 +37,6 @@ threads/conditionex
 threads/readwritelockex
 threads/sem
 threads/bank/mybank
+threads/barriers
 
 *.o
