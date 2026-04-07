@@ -1,0 +1,40 @@
+List all team member names in alphabetical order (by last name):
+
+
+
+
+
+
+
+
+Using a hex editor and the "random.img" FAT12 disk image in the Git repository, find the following:
+
+1. List the contents of the root directory: full names (filename + extension) and whether they are a file or a subdirectory.
+
+
+
+
+
+
+
+ 
+2. The 525th byte (start counting bytes at 1) in the 1st file in the root directory. 
+
+
+
+
+
+3. The number of files (don't include any subdirectories) in subdirectory "/27"
+
+
+
+
+
+4. The first logical cluster of a deleted file (any file)
+
+
+
+
+
+
+5. The size of the file "/20/24.TXT"
