@@ -26,7 +26,7 @@ int main() {
 
     //same but free the remaining values
     for (int i=0; i < NUM_VALUES; i++) {
-        if (*(values[i]) != i) {
+        if (values[i] && *(values[i]) != i) {
             printf("ERROR: values[%d] != %d (%d)\n", i, i, *(values[i]));
         }
 
