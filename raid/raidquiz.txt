@@ -1,0 +1,9 @@
+List all team member names in alphabetical order:
+
+
+
+
+
+I have two very small RAID arrays that have each lost a disk, containing an important message. One is RAID 4. The other RAID 5. The block size on both is 256 bytes, and I can't recall if I used even or odd parity (sorry). ¯\_(ツ)_/¯
+
+Your task: figure out which parity scheme I used, and find the lost messages.
